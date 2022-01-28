@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from "react";  // 리액트 라이브러리에서 컴포넌트 들고오기
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component{ // 컴포넌트를 사용할 수 있게 extends
+  btnStyle = {
+    color : "#fff",
+    border : "none",
+    padding : "5px 9px",
+    borderRadius : "50%",
+    cursor : "pointer",
+    float : "right",
+  }
+getStyle = () =>{
+  return{
+    padding : "10px",
+    borderBottom:"1px #ccc dotted",
+    textDecoration : "none"
+  }
 }
 
-export default App;
+todoData=[ //배열안에 객체넣기 
+  {
+    id:"1",
+    title:"공부하기",
+    completed: true
+  },
+  {
+    id:"2",
+    title:"청소하기",
+    completed: false 
+  }
+]
+
+
+  render(){
+    return(
+      <div className="container">
+        <div className="todoBlock">
+          <div className="title">
+            <h1>할 일 목록</h1>
+          </div>
+          {this.todoData.map(data=>(
+          <div style={this.getStyle()} key={data.id}>
+            <input type="checkbox" defaultChecked={data.completed}></input>
+            {data.title}
+            <button style={this.btnStyle}>X</button>
+          </div>
+          ))}
+
+        </div>
+      </div>
+    )
+  }
+}
