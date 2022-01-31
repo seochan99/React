@@ -2,7 +2,7 @@ import React, {Component} from "react";  // 리액트 라이브러리에서 컴�
 import "./App.css";
 
 export default class App extends Component{ // 컴포넌트를 사용할 수 있게 extends
-  
+
   btnStyle = {
     color : "#fff",
     border : "none",
@@ -12,47 +12,75 @@ export default class App extends Component{ // 컴포넌트를 사용할 수 있
     float : "right",
   }
 
-getStyle = () =>{
+//style 
+getStyle = (completed) =>{
   return{
     padding : "10px",
     borderBottom:"1px #ccc dotted",
-    textDecoration : "none"
+    textDecoration : completed ? "line-through" : "none",
   }
 }
 
-todoData=[ //배열안에 객체넣기 
-  {
-    id:"1",
-    title:"공부하기",
-    completed: true
-  },
-  {
-    id:"2",
-    title:"청소하기",
-    completed: false 
+//할일 목록 삭제 함수 
+hanndleClick=(id)=>{
+  //filter method를 사용해서 
+  //id가 같은거를 필터링 해버리자 
+  let newTodoData = this.state.todoData.filter(data=> data.id != id);
+  console.log('newTodoData',newTodoData);
+  //list의 id가 와서 데이터의 아이디가 아닌것만 트루를 반환해서 살린다 
+  this.setState({todoData:newTodoData}); 
+}
+
+handleChange =(e)=>{
+
+  this.setState({value : e.target.value});
+
+}
+handleSumbit = (e) =>{
+  //form아ㄴ에 input전송시 페이지 리로드 막자 
+  e.preventDefault();
+  //새로운 할 일 데이터 
+  let newTodo = {
+    id : Date.now(), //유니크한 값 
+    title: this.state.value,
+    completed : false, 
   }
-]
+  //원래 있던 할 일에 새로운 일을 더하자 
+  this.setState({todoData:[...this.state.todoData,newTodo],value:""}); 
+  // ... : 전개연산자 
+  // 이미 있는거에 새로운거 더해주기 
+
+  //입력란 안에 있던 글시 지워주기 설명 안하노 ㅋㅋ 
+}
 
 
-  render(){
-    return(
-      <div className="container">
-        <div className="todoBlock">
-          <div className="title">
-            <h1>할 일 목록</h1>
-          </div>
-          {this.todoData.map(data=>(
-          <div style={this.getStyle()} key={data.id}>
-            <input type="checkbox" defaultChecked={data.completed}></input>
-            {data.title}
-            <button style={this.btnStyle}>X</button>
-          </div>
-          ))}
+state = { //객체로 state 생성 
+  todoData : [ //배열안에 객체넣기 
+    {
+      id:"1",
+      title:"공부하기",
+      completed: false
+    },
+    {
+      id:"2",
+      title:"청소하기",
+      completed: false 
+    }
+  ],
+  value:""
+}
 
-        </div>
-      </div>
-    )
-  }
+
+handleCompleteChange = (id) =>{
+  let newTodoData = this.state.todoData.map(data=>{
+    if(data.id === id){
+      data.completed = !data.completed; 
+    }
+    return data; 
+  })
+  this.setState({todoData:newTodoData});
+}
+
   render(){ // 변환한다 
     return( // 반환한다 
       // 컨테이너를 감싸고
@@ -65,20 +93,96 @@ todoData=[ //배열안에 객체넣기
           </div>
           {/* 밑에서부터 할일 목록을 나열한다 */}
           {/* 반복형으로 나열 */}
-          {this.todoData.map(data=>(
+          {this.state.todoData.map(data=>(
             // this는 클래스를 가리키고 클래스 안에 todoData라는 리스트객체를 가지고 와서 그 안에 데이터를 꺼내는데 map함수를 써서 꺼낸다
             // map은 객체별 요소를 data라는 변수로 정해주고 data객체 안에 id,completed,title을 가져온다
             // style같은경우도 겹치는 경우가 많으니 this를 사용해서 클래스 내에 만들어둔 스타일을 가지고 와서 사용한다
             // react에서는 반복되는 값들을 가지고올때 유니크한 값와 같은 key값을 줘야한다 
-            <div style={this.getStyle()} key={data.id}>
-              <input type="checkbox" defaultChecked={data.completed}></input>
+            <div style={this.getStyle(data.completed)} key={data.id}>
+              <input type="checkbox" defaultChecked={data.completed} onChange={()=>this.handleCompleteChange(data.id)}></input>
               {data.title}
-              <button style={this.btnStyle}>X</button>
+              <button style={this.btnStyle} onClick={()=>this.hanndleClick(data.id)}>X</button>
             </div>
           ))}
-        </div>
+          <form style={{ display : 'flex'}} onSubmit={this.handleSumbit}>
+            <input 
+              type="text" 
+              name="value" 
+              style={{flex:'10', padding:'5px'}} 
+              placeholder="해야할 일 을 입력해주세요" 
+              value={this.setState.value}
+              onChange={this.handleChange}
+              />
+            <input
+              type="submit"
+              value="입력"
+              className="btn"
+              style={{flex:'1'}}
+            />
+          </form>
 
+
+        </div>
       </div>
+      
     )
   }
 }
+
+
+// const arr1 = [1,2,3];
+// const arr2 = [4,5,6];
+// const arr3 = [7,8,9];
+// const arrWrap = arr1.concat(arr2,arr3); 
+
+// console.log(arrWrap) // [1,2,3,4,5,6,7,8,9]
+
+// const arr1 = [1,2,3];
+// const arr2 = [4,5,6];
+// const arr3 = [7,8,9];
+// const arrWrap = [...arr1,...arr2,...arr3]
+// console.log(arrWrap) // [1,2,3,4,5,6,7,8,9]
+
+// const arr1 = [1,2,3]
+// const arr2 = [4,5]
+// arr1.push(...arr2)
+
+// const obj1={
+//   a:"A",
+//   b:"B"
+// }
+// const obj2={
+//   c:"C",
+//   d:"D"
+// }
+// const objWrap = {obj1,obj2};
+// console.log(objWrap); 
+// {
+//   obj1={
+//     a:"A",
+//     b:"B"
+//   },
+//   obj2={
+//     c:"C",
+//     d:"D"
+//   }
+// }
+// const obj1={
+//   a:"A",
+//   b:"B"
+// }
+// const obj2={
+//   c:"C",
+//   d:"D"
+// }
+// const objWrap = {...obj1,...obj2};
+// // console.log(objWrap); 
+// // {
+// //   a:"A",
+// //   b:"B"
+// //   c:"C",
+// //   d:"D"
+// // }
+
+
+
