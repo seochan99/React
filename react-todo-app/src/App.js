@@ -15,9 +15,6 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   const [value,setValue] = useState("");
   //this.todoData -> todoData로 바꿔주기 
 
-
-
-
 const handleSumbit = (e) =>{
   //form아ㄴ에 input전송시 페이지 리로드 막자 
   e.preventDefault();
@@ -33,12 +30,6 @@ const handleSumbit = (e) =>{
   // 이미 있는거에 새로운거 더해주기
   //입력란 안에 있던 글시 지워주기 설명 안하노 ㅋㅋ 
 }
-
-
-
-
-
-
     return( // 반환한다 
       // 컨테이너를 감싸고
       <div className="container">
@@ -48,20 +39,13 @@ const handleSumbit = (e) =>{
           <div className="title">
             My To do List 
           </div>
-
           <List todoData={todoData} setTodoData={setTodoData}/>
           <Form handleSumbit={handleSumbit} value={value} setValue={setValue}/>
           {/* 밑에서부터 할일 목록을 나열한다 */}
           {/* 반복형으로 나열 */}
-
-
-
-
         </div>
-      </div>
-      
+      </div> 
     )
-  
 }
 
 
