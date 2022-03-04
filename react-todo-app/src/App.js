@@ -30,13 +30,14 @@ const handleSumbit = (e) =>{
   // 이미 있는거에 새로운거 더해주기
   //입력란 안에 있던 글시 지워주기 설명 안하노 ㅋㅋ 
 }
+// 컨테이너를 감싸고
     return( // 반환한다 
-      // 컨테이너를 감싸고
-      <div className="container">
+      <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
         {/* div박스하나를 만든다. 투두블락 */}
-        <div className="todoBlock">
+        <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg"> 
+        {/* 반응형 클래스주기 */}
           {/* 그리고 제목박스도  */}
-          <div className="title">
+          <div className="flex justify-between mb-3">
             My To do List 
           </div>
           <List todoData={todoData} setTodoData={setTodoData}/>
