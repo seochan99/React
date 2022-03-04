@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const Lists = React.memo((
-    {id,title,completed,todoData,setTodoData,provided,snapshot}
+    {id,title,completed,todoData,setTodoData,provided,snapshot,hanndleClick}
 ) =>{
     const handleCompleteChange = (id) =>{
         let newTodoData = todoData.map(data=>{
@@ -17,15 +17,7 @@ const Lists = React.memo((
     };
 
 
-    //할일 목록 삭제 함수 
-    const hanndleClick=(id)=>{
-        //filter method를 사용해서 
-        //id가 같은거를 필터링 해버리자 
-        let newTodoData = todoData.filter(data=> data.id !== id);
-        console.log('newTodoData',newTodoData);
-        //list의 id가 와서 데이터의 아이디가 아닌것만 트루를 반환해서 살린다 
-        setTodoData(newTodoData);
-    };
+
 
   return (
     <div 

@@ -1,5 +1,5 @@
 // 함수형 
-import React, {useState} from "react";  // 리액트 라이브러리에서 컴포넌트 들고오기
+import React, {useState, useCallback} from "react";  // 리액트 라이브러리에서 컴포넌트 들고오기
 import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
@@ -14,6 +14,19 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   const [todoData,setTodoData] = useState([]);
   const [value,setValue] = useState("");
   //this.todoData -> todoData로 바꿔주기 
+
+
+    //할일 목록 삭제 함수 
+    const hanndleClick=useCallback((id)=>{
+      //filter method를 사용해서 
+      //id가 같은거를 필터링 해버리자 
+      let newTodoData = todoData.filter(data=> data.id !== id);
+      console.log('newTodoData',newTodoData);
+      //list의 id가 와서 데이터의 아이디가 아닌것만 트루를 반환해서 살린다 
+      setTodoData(newTodoData);
+  },
+  [todoData] //todoData가 변할때만 ! 
+  );
 
 const handleSumbit = (e) =>{
   //form아ㄴ에 input전송시 페이지 리로드 막자 
@@ -40,7 +53,7 @@ const handleSumbit = (e) =>{
           <div className="flex justify-between mb-3">
             My To do List 
           </div>
-          <List todoData={todoData} setTodoData={setTodoData}/>
+          <List hanndleClick={hanndleClick} todoData={todoData} setTodoData={setTodoData}/>
           <Form handleSumbit={handleSumbit} value={value} setValue={setValue}/>
           {/* 밑에서부터 할일 목록을 나열한다 */}
           {/* 반복형으로 나열 */}
