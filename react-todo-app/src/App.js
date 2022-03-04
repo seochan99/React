@@ -25,7 +25,7 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
       //list의 id가 와서 데이터의 아이디가 아닌것만 트루를 반환해서 살린다 
       setTodoData(newTodoData);
   },
-  [todoData] //todoData가 변할때만 ! 
+  [todoData] //todoData가 변할때만 다시생성할 수 있게한다! 
   );
 
 const handleSumbit = (e) =>{
