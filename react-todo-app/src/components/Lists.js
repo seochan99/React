@@ -2,8 +2,7 @@
 import React from 'react'
 
 
-
-const Lists = (
+const Lists = React.memo((
     {id,title,completed,todoData,setTodoData,provided,snapshot}
 ) =>{
     const handleCompleteChange = (id) =>{
@@ -45,6 +44,6 @@ const Lists = (
             </div>
         </div>
   )
-}
+});
 
 export default Lists
