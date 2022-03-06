@@ -4,6 +4,8 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 
+const saveTodoData = localStorage.getItem("todoData") ? JSON.parse(localStorage.getItem("todoData")) : [];
+
 export default function App(){ // 컴포넌트를 사용할 수 있게 extends
 
   // state = { //객체로 state 생성 
@@ -13,17 +15,26 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   //state바꿔주기 
   const [todoData,setTodoData] = useState([]);
   const [value,setValue] = useState("");
-  //this.todoData -> todoData로 바꿔주기 
+  //this.todoData -> todoData로 바꿔주기
+
+  //State 생성 
+  // const [isEditing, setIsEditing] = useState(false); 
+  // const [editedTitle, setEditedTitle] = useState(title);
+  
 
 
+  const handleRemoveClick = () => {
+    setTodoData([]);  //tododata 다 날리기
+  };
     //할일 목록 삭제 함수 
     const hanndleClick=useCallback((id)=>{
       //filter method를 사용해서 
       //id가 같은거를 필터링 해버리자 
       let newTodoData = todoData.filter(data=> data.id !== id);
-      console.log('newTodoData',newTodoData);
       //list의 id가 와서 데이터의 아이디가 아닌것만 트루를 반환해서 살린다 
       setTodoData(newTodoData);
+      localStorage.setItem("todoData",JSON.stringify(newTodoData)); //로칼에 저장 
+
   },
   [todoData] //todoData가 변할때만 다시생성할 수 있게한다! 
   );
@@ -51,7 +62,8 @@ const handleSumbit = (e) =>{
         {/* 반응형 클래스주기 */}
           {/* 그리고 제목박스도  */}
           <div className="flex justify-between mb-3">
-            My To do List 
+            할 일 목록
+            <button className="border shadow p-2 bg-blue-100 " onClick={handleRemoveClick}>모두 삭제하기</button>
           </div>
           <List hanndleClick={hanndleClick} todoData={todoData} setTodoData={setTodoData}/>
           <Form handleSumbit={handleSumbit} value={value} setValue={setValue}/>
