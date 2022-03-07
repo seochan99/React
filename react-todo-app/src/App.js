@@ -18,8 +18,7 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   //this.todoData -> todoData로 바꿔주기
 
   //State 생성 
-  // const [isEditing, setIsEditing] = useState(false); 
-  // const [editedTitle, setEditedTitle] = useState(title);
+
   
 
 
@@ -43,6 +42,12 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   },
   [todoData] //todoData가 변할때만 다시생성할 수 있게한다! 
   );
+  // append localStorage
+  // function appendToStorage(name,data){
+  //   var old = localStorage.getItem(name);
+  //   if(old === null ) old="";
+  //   localStorage.setItem(name,old+data)
+  // }
 
 const handleSumbit = (e) =>{
   //form아ㄴ에 input전송시 페이지 리로드 막자 
@@ -53,6 +58,7 @@ const handleSumbit = (e) =>{
     title: value,
     completed : false, 
   }
+  // appendToStorage('todoDatas',JSON.stringify(newTodo))
   setTodoData(prev=>[...prev,newTodo]);
   setValue(""); 
   // ... : 전개연산자 
