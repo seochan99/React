@@ -26,7 +26,7 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   //할일 목록 삭제 함수 
   const handleRemoveClick = () => {
     setTodoData([]);  //tododata 다 날리기
-    localStorage.removeItem("todoData");
+    localStorage.removeItem("todoData"); //local 다 날리기
 
   };
 
