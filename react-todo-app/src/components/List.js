@@ -1,6 +1,7 @@
 // rfc 엔터하면 함수형 컴포넌트 만들기 가능 
 import React from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 import Lists from './Lists';
 
 
@@ -15,10 +16,10 @@ const List = React.memo(({todoData, setTodoData,hanndleClick}) =>{
     
         // 1. 변경시키는 아이템을 배열에서 지움 
         // 2. return 값으로 지워진 아이템을 잡음 
-        const [reorderItem] = newTodoData.splice(result.source.index, 1);
+        const [reorderedItem] = newTodoData.splice(result.source.index, 1);
     
         // 원하는 자리에 reoderedItem을 invert 한다
-        newTodoData.splice(result.destination.index, 0, reorderItem);
+        newTodoData.splice(result.destination.index, 0, reorderedItem);
         setTodoData(newTodoData);
     };
   return (
@@ -34,11 +35,11 @@ const List = React.memo(({todoData, setTodoData,hanndleClick}) =>{
                     {todoData.map((data,index)=>(
                         <Draggable
                         key={data.id}
-                        draableId={data.id.toString()}
+                        draggableId={data.id.toString()}
                         index={index}
                         >
                             {(provided,snapshot)=>(
-                                <Lists 
+                                <Lists
                                 hanndleClick={hanndleClick}
                                 key={data.id}
                                 id={data.id}
@@ -61,4 +62,4 @@ const List = React.memo(({todoData, setTodoData,hanndleClick}) =>{
   );
 });
 
-export default List
+export default List;

@@ -13,7 +13,7 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   //   value:"",
   // };
   //state바꿔주기 
-  const [todoData,setTodoData] = useState([]);
+  const [todoData,setTodoData] = useState(saveTodoData);
   const [value,setValue] = useState("");
   //this.todoData -> todoData로 바꿔주기
 
@@ -23,17 +23,22 @@ export default function App(){ // 컴포넌트를 사용할 수 있게 extends
   
 
 
+  //할일 목록 삭제 함수 
   const handleRemoveClick = () => {
     setTodoData([]);  //tododata 다 날리기
+    localStorage.removeItem("todoData");
+
   };
-    //할일 목록 삭제 함수 
-    const hanndleClick=useCallback((id)=>{
+
+  const hanndleClick=useCallback((id)=>{
       //filter method를 사용해서 
       //id가 같은거를 필터링 해버리자 
-      let newTodoData = todoData.filter(data=> data.id !== id);
+      let newTodoData = todoData.filter((data) => data.id !== id);
+      localStorage.setItem("todoData",JSON.stringify(newTodoData)); //로칼에 저장 
       //list의 id가 와서 데이터의 아이디가 아닌것만 트루를 반환해서 살린다 
       setTodoData(newTodoData);
-      localStorage.setItem("todoData",JSON.stringify(newTodoData)); //로칼에 저장 
+      
+      
 
   },
   [todoData] //todoData가 변할때만 다시생성할 수 있게한다! 
