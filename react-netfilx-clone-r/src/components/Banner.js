@@ -4,10 +4,12 @@ import requests from '../api/requests';
 import "./Banner.css"
 
 export default function Banner() {
-    const [movie, setMovie] = useState([]);
+
+const [movie, setMovie] = useState([]);
+
 useEffect(() => {
     fetchData(); 
-},)
+},[])
 
 
 // async, await 비동기로 요청보냄 
