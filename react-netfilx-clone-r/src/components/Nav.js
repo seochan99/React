@@ -22,7 +22,7 @@ export default function Nav() {
     }, [])
     
     const handleChange = (e) => {
-        setsearchValue(e.target.value);
+        setsearchValue(e.target.value); //바로 검색가능하다. 
         navigate(`/search?q=${e.target.value}`)
         
 
