@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import Banner from './components/Banner';
 import Row from './components/Row';
 import requests from './api/requests';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         fetchUrl={requests.fetchNetflixOriginals}
         isLargeRow
       />
-      
+
       <Row
         title="Trending Now"
         id = "TN"
@@ -39,6 +40,7 @@ function App() {
         id = "CM"
         fetchUrl={requests.fetchComedyMovies}
       />
+      <Footer/>
     </div>
   );
 }

@@ -19,12 +19,14 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
     <section className="row">
         <h2>{title}</h2>
         <div className='slider'>
-            <div className='slider__arrow-left'>
+            <div
+                className='slider__arrow-left'               
+                onClick={()=>{ //스크롤 기능(완)
+                        document.getElementById(id).scrollLeft -= window.innerWidth - 80;
+                    }}>
                 <span
                     className='arrow' 
-                    onClick={()=>{
-                        document.getElementById(id).scrollLeft -= window.innerWidth - 80;
-                    }}
+
                     >
                         {"<"}
                 </span>
@@ -40,12 +42,14 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
                     />
                 ))}
             </div>
-            <div className='slider__arrow-right'>
+            <div 
+                className='slider__arrow-right'
+                onClick={()=>{ //스크롤 기능(오)
+                    document.getElementById(id).scrollLeft += window.innerWidth - 80;
+                }}>
                 <span 
                 className='arrow'
-                onClick={()=>{
-                    document.getElementById(id).scrollLeft += window.innerWidth - 80;
-                }}
+                
                 >{">"}</span>
             </div>
         </div>
