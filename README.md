@@ -7,3 +7,6 @@
 ### Challenge
 <img width="1140" alt="스크린샷 2022-03-07 오후 8 01 59" src="https://user-images.githubusercontent.com/78739194/157019282-5da7207d-59b1-4962-a0b8-ad7a9f690fef.png">
 
+## 3차 미션 스크린샷
+### Basic
+<img width="767" alt="스크린샷 2022-03-22 오전 12 11 30" src="https://user-images.githubusercontent.com/78739194/159291348-1ff00e92-8fbc-4186-9dbc-bba50e8eec7c.png">
