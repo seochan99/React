@@ -87,3 +87,4 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
     </section>
     )
 }
+//스와이프모르게따
