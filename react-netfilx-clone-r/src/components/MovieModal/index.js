@@ -13,7 +13,9 @@ function MovieModal({
 }){
 
     // const [menuBtnClick, setMenuBtnClick] = useState(false);
+
     const outSection = useRef(); // 모달창 영역 밖에 해당하는 부분 useRef을 통해 선택
+
     useEffect(() => {
         document.addEventListener('mousedown',handleClickOutside);
     
@@ -25,10 +27,6 @@ function MovieModal({
         if(outSection && !outSection.current.contains(e.target)){
             setModalOpen(false);
             console.log("밖 선택");
-        }
-        else{
-            setModalOpen(true);
-            console.log("안 선택");
         }
     }
     

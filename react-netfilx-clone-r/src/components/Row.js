@@ -55,8 +55,9 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
                 </span>
             </div>
 
-            <SwiperSlide id={id} className="row__posters">
+            <div id={id} className="row__posters">
                 {movies.map((movie) => (
+                    
                     <img
                         key={movie.id}
                         className={`row__poster ${isLargeRow && "row__posterLarge"}`}
@@ -66,7 +67,7 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
                         onClick={()=> handleClick(movie)}
                     />
                     ))}
-            </SwiperSlide>
+            </div>
 
             <div 
                 className='slider__arrow-right'
