@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 function SummaryPage() {
     const [checked, setChecked] = useState(false);
 
-  return (
+return (
     <div>
         <form>
             <input
@@ -22,7 +22,7 @@ function SummaryPage() {
             </button>
         </form>
     </div>
-  )
+)
 }
 
 export default SummaryPage
