@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import "./MovieModal.css";
 
 function MovieModal({
@@ -16,29 +17,29 @@ function MovieModal({
 
     const outSection = useRef(); // 모달창 영역 밖에 해당하는 부분 useRef을 통해 선택
 
-    useEffect(() => {
-        document.addEventListener('mousedown',handleClickOutside);
+    //커스텀 훅 만들기
+    useOnClickOutside(outSection,()=>{setModalOpen(false)});
     
-      return () => {
-        document.removeEventListener('mousedown',handleClickOutside);
-      }
-    })
-    const handleClickOutside=(e)=>{
-        if(outSection && !outSection.current.contains(e.target)){
-            setModalOpen(false);
-            console.log("밖 선택");
-        }
-    }
+
+    // useEffect(() => {
+    //     document.addEventListener('mousedown',handleClickOutside);
+    
+    //   return () => {
+    //     document.removeEventListener('mousedown',handleClickOutside);
+    //   }
+    // })
+    // const handleClickOutside=(e)=>{
+    //     if(outSection && !outSection.current.contains(e.target)){
+    //         setModalOpen(false);
+    //         console.log("밖 선택");
+    //     }
+    // }
     
 
 
     return <div className="presentation">
         <div className='wrapper-modal'>
             <div ref={outSection} className='modal'>
-
-
-
-                
                 <span onClick={()=> setModalOpen(false)} className='modal-close'>
                     X
                 </span>
