@@ -5,10 +5,15 @@ import "./Row.css";
 
 
 
-import "swiper/css"; //basic
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import {Swiper, SwiperSlide} from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 
 
@@ -38,11 +43,37 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
     
     <section className="row">    
         <h2>{title}</h2>
-        <Swiper onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)} className='slider'>
+        <Swiper
+      // install Swiper modules
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        navigation
+        pagination={{ clickable: true }}
+        loop={true} //끝에 갔을때 돌아오기
+        breakpoints={{ //크기별로 다르게 주기 
+            1378:{
+                slidesPerView:6,
+                slidesPerGroup:6,
+            },
+            998: {
+                slidesPerView:5,
+                slidesPerGroup:5,
+            },
+            625: {
+                slidesPerView:4,
+                slidesPerGroup:4,
+            },
+            0:{
+                slidesPerView:3,
+                slidesPerGroup:3,
+            }
+        }}
+        
+        onSlideChange={() => console.log('slide change')}
+    >
         
 
-            <div
+
+            {/* <div
                 className='slider__arrow-left'               
                 onClick={()=>{ //스크롤 기능(완)
                         document.getElementById(id).scrollLeft -= window.innerWidth - 80;
@@ -53,10 +84,12 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
                     >
                         {"<"}
                 </span>
-            </div>
+            </div> */}
+
 
             <div id={id} className="row__posters">
                 {movies.map((movie) => (
+                    <SwiperSlide>
                     
                     <img
                         key={movie.id}
@@ -66,10 +99,11 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
                         alt={movie.name}
                         onClick={()=> handleClick(movie)}
                     />
+                    </SwiperSlide>
                     ))}
             </div>
 
-            <div 
+            {/* <div 
                 className='slider__arrow-right'
                 onClick={()=>{ //스크롤 기능(오)
                     document.getElementById(id).scrollLeft += window.innerWidth - 80;
@@ -78,7 +112,7 @@ export default function Row({isLargeRow, title, id, fetchUrl}){
                 className='arrow'
                 
                 >{">"}</span>
-            </div>
+            </div> */}
         </Swiper>
         {
             modalOpen && ( //모달 오픈시 
