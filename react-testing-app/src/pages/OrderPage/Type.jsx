@@ -7,6 +7,12 @@ import Options from './Options';
 export default function Type({orderType}) {
     const [items, setItems] = useState([]);
     const [error, setError] = useState(false);
+    const [number, setNumber] = useState(0);
+
+    const plus = () => setNumber(number+1);
+    const minus = () => setNumber(number-1);
+
+
 
     useEffect(()=>{
         loadItems(orderType)
@@ -37,6 +43,12 @@ export default function Type({orderType}) {
     // }
     
   return <div>
+      
+      <div>
+          {number}
+      </div>
+      <button onClick={plus}>+</button>
+      <button onClick={minus}>-</button>
         <h2>주문 종류</h2>
         <p>하나의 가격</p>
         <p>총 가격 : </p>

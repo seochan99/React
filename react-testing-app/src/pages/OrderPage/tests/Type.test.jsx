@@ -33,7 +33,6 @@ test("when fetching product data, face an error", async()=>{
 // 테스트 케이스3
 test("fetch option imformation from server", async()=>{
     render(<Type orderType="options" />)
-
     // bring checkbox
     const optionCheckboxes = await screen.findAllByRole("checkbox");
     expect(optionCheckboxes).toHaveLength(2);

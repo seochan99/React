@@ -12,5 +12,6 @@ test('checkbox and button',()=>{
         name:"주문 확인"
     });
     
+    
     expect(confirmButton.disabled).toBeTruthy();
 })

@@ -17,7 +17,6 @@ function OrderPage() {
                 <button>주문하기</button>
             </div>
 
-
         </div>
     </div>
   )
