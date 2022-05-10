@@ -1,12 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+import EventPractice from './EventPractice';
 
-function App() {
-  return (
-    <>
-      <h2>dsad</h2>
-    </>
-  );
-}
+const App = () => {
+  return <EventPractice />;
+};
 
 export default App;
