@@ -7,13 +7,15 @@ import { useDebounce } from "../../hooks/useDebounce";
 export default function SearchPage() {
     const navigate = useNavigate();
     const [searchResult, setsearchResult] = useState([]);
-
+    console.log(useLocation());
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };
 
     let query = useQuery();
+    console.log(query);
     const searchTerm = query.get("q"); //q에 있는걸 가져온다.
+    console.log(searchTerm);
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
     useEffect(() => {
@@ -27,7 +29,10 @@ export default function SearchPage() {
             const request = await axios.get(
                 `/search/multi?include_adult=false&query=${searchTerm}`
             );
+            console.log(request);
+            console.log(searchResult);
             setsearchResult(request.data.results);
+            console.log(searchResult);
         } catch (error) {
             console.log("ERROR", error);
         }
