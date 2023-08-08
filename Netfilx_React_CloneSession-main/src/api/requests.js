@@ -10,5 +10,4 @@ const requests = {
     fetchDocumentaries: '/discover/movie?with_genres=99',
 };
 
-
 export default requests;
